@@ -3,7 +3,7 @@ substitutions:
   # Dashes are not supported in devicename
   devicename: "lilygohigrowplantsensor"
   friendly_name: "Plant Sensor"
-  device_description: "Keep my plants safe and lively"
+  device_description: "Make Plants Happy Again!"
   project_version: "1.1"
   update_interval: 30min # Set this to e.g. 1min when calibrating
   loglevel: DEBUG
@@ -44,7 +44,7 @@ esphome:
       - switch.turn_off: spower
 
 dashboard_import:
-  package_import_url: github://bruvv/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@main
+  package_import_url: github://pascalfleury/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@baseline
 
 esp32:
   board: lolin_d32
@@ -117,5 +117,5 @@ packages:
   bluetooth: !include common/bluetooth.yaml
   # Battery only works for 12 hours with deepsleep!
   bme280: !include common/bme280.yaml
-  deepsleep: !include common/deepsleep.yaml
+  # deepsleep: !include common/deepsleep.yaml
   battery: !include common/battery.yaml
