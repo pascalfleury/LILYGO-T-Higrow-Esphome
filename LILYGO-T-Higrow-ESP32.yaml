@@ -7,13 +7,13 @@ substitutions:
   update_interval: 30min
   loglevel: DEBUG
   # Calibration data
-  moisture_min: "2.82"
-  moisture_max: "1.39"
+  moisture_min: "2.889"
+  moisture_max: "1.407"
   conductivity_min: "0.075"
-  conductivity_max: "0.25"
-  battery_voltage_min: "3.20"
-  battery_voltage_max: "4.50"
-  temperature_offset: "-3.0"
+  conductivity_max: "1.076"
+  battery_voltage_min: "3.06"
+  battery_voltage_max: "4.67"
+  temperature_offset: "0" # 32.5 -> 21.1 (-11.4)
   # Uncomment run_duration and sleep_duration if you want to use deepsleep
   # set how long to stay awake - NOT less then 10sec
   run_duration: 11s

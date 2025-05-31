@@ -3,10 +3,12 @@ sensor:
   - platform: bme280_i2c
     i2c_id: bus_a
     temperature:
-      name: "${devicename} BME280 Temperature"
+      name: "${devicename} BME280 Temperature (uncalibrated)"
+      id: temperature_sensor_uncalibrated
       oversampling: 1x
-      filters: # uncomment after calibration
-        - offset: ${temperature_offset} # offset in °C for the measured temperature
+    #temperature:
+    #  name: "${devicename} BME280 Temperature (uncalibrated)"
+    #  oversampling: 16x
     pressure:
       name: "${devicename} BME280 Pressure"
       # filters: # uncomment after calibration
@@ -18,3 +20,26 @@ sensor:
     address: 0x77
     update_interval: ${update_interval}
     setup_priority: -300
+  # Define the calibrated temperature sensor
+  - platform: template
+    name: "${devicename} BME280 Temperature"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    id: calibrated_temperature
+    # This lambda provides the raw value to the template sensor.
+    # The filters below will then operate on this value.
+    lambda: |-
+      return id(temperature_sensor_uncalibrated).state;
+    filters:
+      - calibrate_linear:
+          method: least_squares
+          datapoints:  # sensor reading -> true value
+          - 32.4 -> 25.4
+          - 30.8 -> 23.69
+          - 31.9 -> 24.38
+          - 33.3 -> 25.65
+          - 31.8 -> 24.82
+          - 31.1 -> 24.95
+          - 29.5 -> 24.3
+          - 29.8 -> 22.86
