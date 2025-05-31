@@ -3,21 +3,42 @@ sensor:
   - platform: bme280_i2c
     i2c_id: bus_a
     temperature:
-      name: "${friendly_name} BME280 Temperature"
-      id: "${devicename}_bme280_temperature"
+      name: "${friendly_name} BME280 Temperature (uncalibrated)"
+      id: "${devicename}_b280_temperature_uncalibrated"
       oversampling: 1x
-      filters: # uncomment after calibration
-        - offset: ${temperature_offset} # offset in °C for the measured temperature
     pressure:
       name: "${friendly_name} BME280 Pressure"
       id: "${devicename}_bme280_pressure"
       # filters: # uncomment after calibration
-      #   - offset: -2.3 # offset in hPa for the measured temperature
+      #   - offset: -2.3 # offset in hPa for the measured pressure
     humidity:
       name: "${friendly_name} BME280 Humidity"
       id: "${devicename}_b280_humidity"
       # filters: # uncomment after calibration
-      #   - offset: -2.3 # offset in % for the measured temperature
+      #   - offset: -2.3 # offset in % for the measured humidity
     address: 0x77
     update_interval: ${update_interval}
     setup_priority: -300
+  # Define the calibrated temperature sensor
+  - platform: template
+    name: "${friendly_name} BME280 Temperature"
+    id: "${devicename}_b280_temperature"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    # This lambda provides the raw value to the template sensor.
+    # The filters below will then operate on this value.
+    lambda: |-
+      return id(${devicename}_b280_temperature_uncalibrated).state;
+    filters:
+      - calibrate_linear:
+          method: least_squares
+          datapoints:  # sensor reading -> true value
+          - 32.4 -> 25.4
+          - 30.8 -> 23.69
+          - 31.9 -> 24.38
+          - 33.3 -> 25.65
+          - 31.8 -> 24.82
+          - 31.1 -> 24.95
+          - 29.5 -> 24.3
+          - 29.8 -> 22.86
