@@ -35,6 +35,6 @@ sensor:
       - multiply: 2
       - calibrate_linear:
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - 3.18 -> 0.0
-          - 4.20 -> 100.0
+          - ${battery_voltage_min} -> 0.0
+          - ${battery_voltage_max} -> 100.0
     update_interval: ${update_interval}
