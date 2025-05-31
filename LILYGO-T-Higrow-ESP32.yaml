@@ -115,7 +115,7 @@ sensor:
 
 packages:
   text_sensors: !include common/text_sensors.yaml
-  dht: !include common/dht.yaml
+  # dht: !include common/dht.yaml
   plantsensors: !include common/plantsensors.yaml
   # waterpump: !include common/waterpump.yaml
   bluetooth: !include common/bluetooth.yaml
