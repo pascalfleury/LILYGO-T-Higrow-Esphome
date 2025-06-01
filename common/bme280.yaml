@@ -5,8 +5,8 @@ sensor:
     temperature:
       name: "${devicename} BME280 Temperature"
       oversampling: 1x
-      filters: # uncomment after calibration
-        - offset: ${temperature_offset} # offset in °C for the measured temperature
+      # filters: # uncomment after calibration
+      #   - offset: -2.3 # offset in °C for the measured temperature
     pressure:
       name: "${devicename} BME280 Pressure"
       # filters: # uncomment after calibration
