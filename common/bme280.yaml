@@ -6,18 +6,18 @@ sensor:
       name: "${friendly_name} BME280 Temperature"
       id: "${devicename}_bme280_temperature"
       oversampling: 1x
-      # filters: # uncomment after calibration
-      #   - offset: -2.3 # offset in °C for the measured temperature
+      filters: # uncomment after calibration
+        - offset: ${temperature_offset} # offset in °C for the measured temperature
     pressure:
       name: "${friendly_name} BME280 Pressure"
       id: "${devicename}_bme280_pressure"
       # filters: # uncomment after calibration
-      #   - offset: -2.3 # offset in °C for the measured temperature
+      #   - offset: -2.3 # offset in hPa for the measured temperature
     humidity:
       name: "${friendly_name} BME280 Humidity"
       id: "${devicename}_b280_humidity"
       # filters: # uncomment after calibration
-      #   - offset: -2.3 # offset in °C for the measured temperature
+      #   - offset: -2.3 # offset in % for the measured temperature
     address: 0x77
     update_interval: ${update_interval}
     setup_priority: -300
