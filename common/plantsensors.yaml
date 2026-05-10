@@ -7,7 +7,7 @@ sensor:
     id: ${devicename}_moisture
     icon: 'mdi:watering-can'
     update_interval: ${update_interval}
-    attenuation: 11db
+    attenuation: 12db
     accuracy_decimals: '${ 5 if calibration_mode else 2 }'
     unit_of_measurement: '${ "V" if calibration_mode else "%" }'
     device_class: 'moisture'
@@ -26,7 +26,7 @@ sensor:
     id: '${devicename}_soil_conductivity'
     icon: 'mdi:flower'
     update_interval: ${update_interval}
-    attenuation: 11db
+    attenuation: 12db
     accuracy_decimals: '${ 5 if calibration_mode else 2 }'
     unit_of_measurement: '${ "V" if calibration_mode else "µS/cm" }'
     # device_class: '' # for now home assistant does not support this class
